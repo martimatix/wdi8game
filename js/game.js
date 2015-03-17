@@ -13,13 +13,20 @@ $(document).ready(function() {
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
 
-    var balloon = game.add.sprite(400, 0, 'balloon');
+    // This is where the balloons appears appears
+    var balloon = game.add.sprite(400, 400, 'balloon');
 
+    // enable physics for the balloon
     game.physics.arcade.enable(balloon);
 
-    balloon.body.bounce.y = 0.5;
-    balloon.body.gravity.y = 300;
-    balloon.body.collideWorldBounds = true;
+    // balloon has no gravity
+    balloon.body.gravity.y = 0;
+
+    // balloon can go off screen
+    balloon.body.collideWorldBounds = false;
+
+    // balloon moves upwards
+    game.physics.arcade.accelerateToXY(balloon, 400, -100) 
   }
 
   function update() {
