@@ -39,7 +39,10 @@ $(document).ready(function() {
     game.physics.arcade.accelerateToXY(balloon, 400, -100);
 
     // alter centre of cannon so that it rotates at the wheel
-    cannon.anchor.set(0.4, 0.73); 
+    cannon.anchor.set(0.4, 0.735); 
+
+    // slow down rotation of cannon
+    cannon.body.maxAngular = 25;
 
     //  Game input
     cursors = game.input.keyboard.createCursorKeys();
