@@ -5,10 +5,13 @@ $(document).ready(function() {
     game.load.image('sky', 'images/sky.png');
     game.load.spritesheet('balloon', 'images/balloons.png', 320, 410);
     game.load.image('cannon', 'images/cannon.png');
+    game.load.image('cannonBall', 'images/cannon_ball.png');
   }
 
   var cannon;
   var balloon;
+  var cannonBall;
+  var cannonBallTime = 0;
 
   function create() {
     //  This will run in Canvas mode, so let's gain a little speed and display
@@ -52,15 +55,33 @@ $(document).ready(function() {
   function update() {
     if (cursors.left.isDown)
     {   
-        cannon.body.angularVelocity = -300;
+      cannon.body.angularVelocity = -300;
     }
     else if (cursors.right.isDown)
     {
-        cannon.body.angularVelocity = 300;
+      cannon.body.angularVelocity = 300;
     }
     else
     {
-        cannon.body.angularVelocity = 0;
+      cannon.body.angularVelocity = 0;
+    }
+
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
+    {
+      fireCannon();
     }
   }
+
+  function fireCannon () {
+    if (game.time.now > cannonBallTime) {
+      cannonBall = game.add.sprite(cannon.body.x + 200, cannon.body.y + 50, 'cannonBall');
+      cannonBall.lifespan = 3000;
+      cannonBall.anchor.set(0.5, 0.5);
+      game.physics.arcade.enable(cannonBall);
+      cannonBall.body.gravity.y = 300;
+      game.physics.arcade.velocityFromAngle(-25 + cannon.body.rotation, 400, cannonBall.body.velocity);
+      cannonBallTime = game.time.now + 1000;
+    }
+  }
+
 });
