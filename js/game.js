@@ -70,6 +70,8 @@ $(document).ready(function() {
     {
       fireCannon();
     }
+
+    game.physics.arcade.collide(cannonBall, balloon);
   }
 
   function fireCannon () {
