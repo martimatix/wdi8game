@@ -71,7 +71,7 @@ $(document).ready(function() {
       fireCannon();
     }
 
-    game.physics.arcade.collide(cannonBall, balloon);
+    game.physics.arcade.collide(cannonBall, balloon, destroyBalloonAndCannon);
   }
 
   function fireCannon () {
@@ -84,6 +84,11 @@ $(document).ready(function() {
       game.physics.arcade.velocityFromAngle(-25 + cannon.body.rotation, 400, cannonBall.body.velocity);
       cannonBallTime = game.time.now + 1000;
     }
+  }
+
+  function destroyBalloonAndCannon () {
+    cannonBall.destroy();
+    balloon.destroy();
   }
 
 });
