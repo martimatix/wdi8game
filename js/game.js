@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   function preload() {
     game.load.image('sky', 'images/sky.png');
-    game.load.spritesheet('balloon', 'images/balloons.png', 320, 410);
+    game.load.image('balloon', 'images/balloon.png');
     game.load.image('cannon', 'images/cannon.png');
     game.load.image('cannonBall', 'images/cannon_ball.png');
   }
@@ -16,8 +16,8 @@ $(document).ready(function() {
 
   function create() {
     //  This will run in Canvas mode, so let's gain a little speed and display
-    game.renderer.clearBeforeRender = false;
-    game.renderer.roundPixels = true;
+    // game.renderer.clearBeforeRender = false;
+    // game.renderer.roundPixels = true;
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -26,7 +26,7 @@ $(document).ready(function() {
     game.add.sprite(0, 0, 'sky');
 
     // This is where the cannon
-    cannon = game.add.sprite(150, 400, 'cannon');
+    cannon = game.add.sprite(190, 510, 'cannon');
 
     // enable physics for the cannon
     game.physics.arcade.enable(cannon);
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
       if (balloon)
       {
-        balloon.reset(500 + 200 * Math.random(), 600);
+        balloon.reset(400 + 200 * Math.random(), 600);
         balloon.lifespan = 3000;
         
         balloon.body.collideWorldBounds = false;
@@ -92,7 +92,7 @@ $(document).ready(function() {
         // balloon moves upwards
         game.physics.arcade.velocityFromAngle(-90, 300 + 300 * Math.random(), balloon.body.velocity);
 
-        balloonTime = game.time.now + 1000 + 2000 * Math.random();
+        balloonTime = game.time.now + 2000 + 2000 * Math.random();
 
       }
     }
@@ -106,7 +106,7 @@ $(document).ready(function() {
       game.physics.arcade.enable(cannonBall);
       cannonBall.body.gravity.y = 300;
       game.physics.arcade.velocityFromAngle(-25 + cannon.body.rotation, 400, cannonBall.body.velocity);
-      cannonBallTime = game.time.now + 1000;
+      cannonBallTime = game.time.now + 1200;
     }
   }
 
