@@ -25,9 +25,8 @@ $(document).ready(function() {
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
 
-    // This is where the balloons appears appears
-    balloon = game.add.sprite(400, 600, 'balloon');
-    cannon = game.add.sprite(150, game.world.height - 80, 'cannon');
+    // This is where the cannon
+    cannon = game.add.sprite(150, 400, 'cannon');
 
     // enable physics for the cannon
     game.physics.arcade.enable(cannon);
@@ -38,7 +37,7 @@ $(document).ready(function() {
     balloons.physicsBodyType = Phaser.Physics.ARCADE;
 
     //  All 40 of them
-    balloons.createMultiple(2, 'balloon');
+    balloons.createMultiple(11, 'balloon');
     balloons.setAll('anchor.x', 0.5);
     balloons.setAll('anchor.y', 0.5);
 
@@ -85,15 +84,15 @@ $(document).ready(function() {
 
       if (balloon)
       {
-        balloon.reset(600, 600);
+        balloon.reset(500 + 200 * Math.random(), 600);
         balloon.lifespan = 3000;
         
         balloon.body.collideWorldBounds = false;
 
         // balloon moves upwards
-        game.physics.arcade.velocityFromAngle(-90, 600, balloon.body.velocity);
+        game.physics.arcade.velocityFromAngle(-90, 300 + 300 * Math.random(), balloon.body.velocity);
 
-        balloonTime = game.time.now + 2000;
+        balloonTime = game.time.now + 1000 + 2000 * Math.random();
 
       }
     }
