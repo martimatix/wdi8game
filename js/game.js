@@ -86,21 +86,18 @@ $(document).ready(function() {
       if (balloon)
       {
         balloon.reset(600, 600);
-        balloon.lifespan = 6000;
+        balloon.lifespan = 3000;
         
         balloon.body.collideWorldBounds = false;
 
         // balloon moves upwards
-        game.physics.arcade.accelerateToXY(balloon, 400, -100);
+        game.physics.arcade.velocityFromAngle(-90, 600, balloon.body.velocity);
 
-
-        balloonTime = game.time.now + 3000;
+        balloonTime = game.time.now + 2000;
 
       }
     }
-
   }
-
 
   function fireCannon () {
     if (game.time.now > cannonBallTime) {
@@ -115,8 +112,8 @@ $(document).ready(function() {
   }
 
   function destroyBalloonAndCannon () {
-    // cannonBall.destroy();
-    // balloon.destroy();
+    cannonBall.destroy();
+    balloon.destroy();
   }
 
 });
