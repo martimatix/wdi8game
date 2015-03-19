@@ -43,28 +43,26 @@ $(document).ready(function() {
 
     // alter centre of cannon so that it rotates at the wheel
     cannon.anchor.set(0.4, 0.735); 
+    cannon.body.angularVelocity = -300;
 
     // slow down rotation of cannon
     cannon.body.maxAngular = 25;
 
     //  Game input
-    cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
   }
 
   function update() {
-    if (cursors.left.isDown)
+    if (cannon.body.rotation > 35)
     {   
       cannon.body.angularVelocity = -300;
     }
-    else if (cursors.right.isDown)
+
+    if (cannon.body.rotation < -55)
     {
       cannon.body.angularVelocity = 300;
     }
-    else
-    {
-      cannon.body.angularVelocity = 0;
-    }
+
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
     {
