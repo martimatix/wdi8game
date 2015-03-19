@@ -10,6 +10,7 @@ $(document).ready(function() {
 
   var cannon;
   var balloon;
+  var balloonTime = 0;
   var cannonBall;
   var cannonBallTime = 0;
 
@@ -28,18 +29,18 @@ $(document).ready(function() {
     balloon = game.add.sprite(400, 600, 'balloon');
     cannon = game.add.sprite(150, game.world.height - 80, 'cannon');
 
-    // enable physics for the balloon
-    game.physics.arcade.enable(balloon);
+    // enable physics for the cannon
     game.physics.arcade.enable(cannon);
 
-    // balloon has no gravity
-    balloon.body.gravity.y = 0;
+    //  Our balloons
+    balloons = game.add.group();
+    balloons.enableBody = true;
+    balloons.physicsBodyType = Phaser.Physics.ARCADE;
 
-    // balloon can go off screen
-    balloon.body.collideWorldBounds = false;
-
-    // balloon moves upwards
-    game.physics.arcade.accelerateToXY(balloon, 400, -100);
+    //  All 40 of them
+    balloons.createMultiple(2, 'balloon');
+    balloons.setAll('anchor.x', 0.5);
+    balloons.setAll('anchor.y', 0.5);
 
     // alter centre of cannon so that it rotates at the wheel
     cannon.anchor.set(0.4, 0.735); 
@@ -71,13 +72,40 @@ $(document).ready(function() {
       fireCannon();
     }
 
+    launchBalloon();
     game.physics.arcade.collide(cannonBall, balloon, destroyBalloonAndCannon);
+
   }
+
+  function launchBalloon () {
+
+    if (game.time.now > balloonTime)
+    {
+      balloon = balloons.getFirstExists(false);
+
+      if (balloon)
+      {
+        balloon.reset(600, 600);
+        balloon.lifespan = 6000;
+        
+        balloon.body.collideWorldBounds = false;
+
+        // balloon moves upwards
+        game.physics.arcade.accelerateToXY(balloon, 400, -100);
+
+
+        balloonTime = game.time.now + 3000;
+
+      }
+    }
+
+  }
+
 
   function fireCannon () {
     if (game.time.now > cannonBallTime) {
       cannonBall = game.add.sprite(cannon.body.x + 200, cannon.body.y + 50, 'cannonBall');
-      cannonBall.lifespan = 3000;
+      cannonBall.lifespan = 10000;
       cannonBall.anchor.set(0.5, 0.5);
       game.physics.arcade.enable(cannonBall);
       cannonBall.body.gravity.y = 300;
@@ -87,8 +115,8 @@ $(document).ready(function() {
   }
 
   function destroyBalloonAndCannon () {
-    cannonBall.destroy();
-    balloon.destroy();
+    // cannonBall.destroy();
+    // balloon.destroy();
   }
 
 });
