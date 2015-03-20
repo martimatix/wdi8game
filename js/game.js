@@ -13,11 +13,12 @@ $(document).ready(function() {
   var balloonTime = 0;
   var cannonBall;
   var cannonBallTime = 0;
+  var piOverOneEighty = Math.PI / 180;
 
   function create() {
     //  This will run in Canvas mode, so let's gain a little speed and display
-    // game.renderer.clearBeforeRender = false;
-    // game.renderer.roundPixels = true;
+    game.renderer.clearBeforeRender = false;
+    game.renderer.roundPixels = true;
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -88,7 +89,7 @@ $(document).ready(function() {
         balloon.body.collideWorldBounds = false;
 
         // balloon moves upwards
-        game.physics.arcade.velocityFromAngle(-90, 300 + 300 * Math.random(), balloon.body.velocity);
+        game.physics.arcade.velocityFromAngle(-105 + 30 * Math.random(), 300 + 300 * Math.random(), balloon.body.velocity);
 
         balloonTime = game.time.now + 2000 + 2000 * Math.random();
 
@@ -98,19 +99,27 @@ $(document).ready(function() {
 
   function fireCannon () {
     if (game.time.now > cannonBallTime) {
-      cannonBall = game.add.sprite(cannon.body.x + 200, cannon.body.y + 50, 'cannonBall');
+      cannonRotationRadians = degreesToRadians(-cannon.body.rotation + 25);
+      console.log(-cannon.body.rotation);
+      // Use trig to find out where cannon ball should appear
+      // Not working because coordinate system is inverted
+      cannonBall = game.add.sprite(cannon.body.x + 101 + 179 * Math.cos(cannonRotationRadians), cannon.body.y + 185 - 179 * Math.sin(cannonRotationRadians), 'cannonBall');
       cannonBall.lifespan = 10000;
       cannonBall.anchor.set(0.5, 0.5);
       game.physics.arcade.enable(cannonBall);
       cannonBall.body.gravity.y = 300;
       game.physics.arcade.velocityFromAngle(-25 + cannon.body.rotation, 400, cannonBall.body.velocity);
-      cannonBallTime = game.time.now + 1200;
+      cannonBallTime = game.time.now + 1500;
     }
   }
 
   function destroyBalloonAndCannon () {
     cannonBall.destroy();
     balloon.destroy();
+  }
+
+  function degreesToRadians (degrees) {
+    return degrees * piOverOneEighty;
   }
 
 });
