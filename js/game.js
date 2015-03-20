@@ -99,7 +99,7 @@ $(document).ready(function() {
 
   function fireCannon () {
     if (game.time.now > cannonBallTime) {
-      cannonRotationRadians = degreesToRadians(-cannon.body.rotation + 25);
+      cannonRotationRadians = degreesToRadians(-cannon.body.rotation + 40);
       console.log(-cannon.body.rotation);
       // Use trig to find out where cannon ball should appear
       // Not working because coordinate system is inverted
@@ -108,7 +108,7 @@ $(document).ready(function() {
       cannonBall.anchor.set(0.5, 0.5);
       game.physics.arcade.enable(cannonBall);
       cannonBall.body.gravity.y = 300;
-      game.physics.arcade.velocityFromAngle(-25 + cannon.body.rotation, 400, cannonBall.body.velocity);
+      game.physics.arcade.velocityFromAngle(-30 + cannon.body.rotation, 400, cannonBall.body.velocity);
       cannonBallTime = game.time.now + 1500;
     }
   }
