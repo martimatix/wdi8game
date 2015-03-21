@@ -1,6 +1,6 @@
 var giveUsJobs = giveUsJobs || {};
 
-giveUsJobs.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '');
+giveUsJobs.game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 giveUsJobs.game.state.add('Boot', giveUsJobs.Boot);
 giveUsJobs.game.state.add('Preload', giveUsJobs.Preload);

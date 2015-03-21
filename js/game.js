@@ -64,11 +64,11 @@ giveUsJobs.Game.prototype = {
     }
 
     this.launchBalloon();
-    this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon);
+    this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
   },
 
-  update: function() {
+  launchBalloon: function() {
 
     if (this.game.time.now > this.balloonTime)
     {
@@ -97,19 +97,19 @@ giveUsJobs.Game.prototype = {
 
   fireCannon: function () {
     if (this.game.time.now > this.cannonBallTime) {
-      var cannonRotationRadians = this.degreesToRadians(-cannon.body.rotation + 40);
+      var cannonRotationRadians = this.degreesToRadians(-this.cannon.body.rotation + 40);
       // Use trig to find out where cannon ball should appear
       this.cannonBall = this.game.add.sprite(this.cannon.body.x + 101 + 179 * Math.cos(cannonRotationRadians), this.cannon.body.y + 185 - 179 * Math.sin(cannonRotationRadians), 'cannonBall');
       this.cannonBall.lifespan = 10000;
       this.cannonBall.anchor.set(0.5, 0.5);
-      this.game.physics.arcade.enable(cannonBall);
+      this.game.physics.arcade.enable(this.cannonBall);
       this.cannonBall.body.gravity.y = 300;
       this.game.physics.arcade.velocityFromAngle(-25 + this.cannon.body.rotation, 400, this.cannonBall.body.velocity);
       this.cannonBallTime = this.game.time.now + 1500;
     }
   },
 
-  destroyBalloonAndCannon: function () {
+  destroyBalloonAndCannon: function (cannonBall, balloon) {
     this.cannonBall.destroy();
     this.balloon.destroy();
   },
