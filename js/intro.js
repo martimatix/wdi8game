@@ -15,8 +15,8 @@ giveUsJobs.Intro.prototype = {
     h.anchor.set(0.5);
   },
   update: function() {
-    // if(this.game.input.activePointer.justPressed()) {
-    //   this.game.state.start('Game');
-    // }
+    if(this.game.input.activePointer.justPressed()) {
+      this.game.state.start('Game');
+    }
   }
 };
