@@ -30,7 +30,7 @@ giveUsJobs.Game.prototype = {
     this.balloons.enableBody = true;
     this.balloons.physicsBodyType = Phaser.Physics.ARCADE;
 
-    //  All 40 of them
+    //  All 11 of them
     this.balloons.createMultiple(11, 'balloon');
     this.balloons.setAll('anchor.x', 0.5);
     this.balloons.setAll('anchor.y', 0.5);
@@ -66,6 +66,10 @@ giveUsJobs.Game.prototype = {
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
+    // Game over condition
+    if (this.balloons.length === 0) {
+      this.game.state.start('GameOver');
+    }
   },
 
   launchBalloon: function() {
@@ -86,16 +90,12 @@ giveUsJobs.Game.prototype = {
 
         this.balloonTime = this.game.time.now + 2000 + 2000 * Math.random();
 
-        // Game over condition
-        if (this.balloons.length === 0) {
-          this.game.state.start('GameOver');
-        }
-
       }
     }
   },
 
   fireCannon: function () {
+    console.log(this.balloons.length)
     if (this.game.time.now > this.cannonBallTime) {
       var cannonRotationRadians = this.degreesToRadians(-this.cannon.body.rotation + 40);
       // Use trig to find out where cannon ball should appear
