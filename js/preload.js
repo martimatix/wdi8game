@@ -14,8 +14,8 @@ giveUsJobs.Preload.prototype = {
 
     // this.load.setPreloadSprite(this.preloadBar);
 
-    //load game assets
-    //images
+    // load game assets
+    // images
     this.load.image('sky', 'images/sky.png');
     this.load.image('cannon', 'images/cannon.png');
     this.load.image('cannonBall', 'images/cannon_ball.png');
@@ -34,10 +34,13 @@ giveUsJobs.Preload.prototype = {
     this.load.image('tom', 'images/tom.png');
     this.load.image('xander', 'images/xander.png');
 
-    //audio
+    // audio
     this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
     this.load.audio('popSound', 'audio/pop.ogg');
     this.load.audio('guileTheme', 'audio/guile_theme.mp3')
+
+    // fonts
+    this.load.bitmapFont('carrier_command', 'fonts/carrier_command.png', 'fonts/carrier_command.xml');
   },
 
   create: function() {

@@ -66,6 +66,10 @@ giveUsJobs.Game.prototype = {
 
     //  Game input
     this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+
+    // Score
+    this.score = 0
+    this.scoreText = this.game.add.bitmapText(580, 5, 'carrier_command','Score 0/11',17);
   },
 
   update: function () {
@@ -88,12 +92,14 @@ giveUsJobs.Game.prototype = {
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
+    // Update Score
+    this.scoreText.text = "Score " + this.score + "/11"
 
-    self = this;
+
     // Game over condition
     if (this.balloons.length === 0) {
       // stop music
-      self.guileTheme.stop();
+      this.guileTheme.stop();
       // go to game over screen
       this.game.state.start('GameOver');
     }
@@ -149,6 +155,8 @@ giveUsJobs.Game.prototype = {
 
     this.cannonBall.destroy();
     this.balloon.destroy();
+
+    this.score++;
   },
 
   degreesToRadians: function (degrees) {
