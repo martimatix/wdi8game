@@ -16,6 +16,9 @@ giveUsJobs.Game.prototype = {
     this.popSound = this.game.add.audio('popSound');
     this.guileTheme = this.game.add.audio('guileTheme');
 
+    // Adjust cannonFire volume
+    this.cannonFire.volume = 0.7;
+
     // Start music
     this.guileTheme.play();
 
@@ -73,8 +76,13 @@ giveUsJobs.Game.prototype = {
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
+
+    self = this;
     // Game over condition
     if (this.balloons.length === 0) {
+      // stop music
+      self.guileTheme.stop();
+      // go to game over screen
       this.game.state.start('GameOver');
     }
   },
@@ -102,7 +110,6 @@ giveUsJobs.Game.prototype = {
   },
 
   fireCannon: function () {
-    console.log(this.balloons.length)
     if (this.game.time.now > this.cannonBallTime) {
       // Play sound
       this.cannonFire.play();
