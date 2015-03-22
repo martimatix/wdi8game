@@ -29,7 +29,10 @@ giveUsJobs.Game.prototype = {
     //  A simple background for our game
     this.game.add.sprite(0, 0, 'sky');
 
-    // This is where the cannon
+    // Draw the platform
+    this.game.add.sprite(-100, 555, 'platform');
+
+    // This is where the cannon is loaded
     this.cannon = this.game.add.sprite(190, 510, 'cannon');
 
     // enable physics for the cannon

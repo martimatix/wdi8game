@@ -20,6 +20,7 @@ giveUsJobs.Preload.prototype = {
     this.load.image('cannon', 'images/cannon.png');
     this.load.image('cannonBall', 'images/cannon_ball.png');
     this.load.image('pop', 'images/pop.png');
+    this.load.image('platform', 'images/platform.png');
 
     // WDI8 Cast
     this.load.image('amy', 'images/amy.png');
