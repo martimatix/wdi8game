@@ -69,10 +69,14 @@ giveUsJobs.Game.prototype = {
 
     // Score
     this.score = 0
-    this.scoreText = this.game.add.bitmapText(580, 5, 'carrier_command','Score 0/11',17);
+    this.scoreText = this.game.add.bitmapText(360, 5, 'carrier_command','',17);
+
+    // Timer
+    this.gameTimer = this.game.time.now
   },
 
   update: function () {
+    // Rotate cannon
     if (this.cannon.body.rotation > 35)
     {   
       this.cannon.body.angularVelocity = -300;
@@ -83,7 +87,7 @@ giveUsJobs.Game.prototype = {
       this.cannon.body.angularVelocity = 300;
     }
 
-
+    // Controls for firing cannon
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.game.input.activePointer.justPressed())
     {
       this.fireCannon();
@@ -92,12 +96,14 @@ giveUsJobs.Game.prototype = {
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
-    // Update Score
-    this.scoreText.text = "Score " + this.score + "/11"
+    var timeLeft = 60 - Math.round((this.game.time.now - this.gameTimer) / 1000)
+
+    // Update Score and Time
+    this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + timeLeft;
 
 
     // Game over condition
-    if (this.balloons.length === 0) {
+    if (this.balloons.length === 0 || timeLeft < 0) {
       // stop music
       this.guileTheme.stop();
       // go to game over screen
