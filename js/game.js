@@ -11,6 +11,9 @@ giveUsJobs.Game.prototype = {
     this.cannonBallTime = 0;
     this.piOverOneEighty = Math.PI / 180;
 
+    // Load sounds
+    this.cannonFire = this.game.add.audio('cannonFire');
+    this.popSound = this.game.add.audio('popSound');
 
     //  This will run in Canvas mode, so let's gain a little speed and display
     this.game.renderer.clearBeforeRender = false;
@@ -97,6 +100,9 @@ giveUsJobs.Game.prototype = {
   fireCannon: function () {
     console.log(this.balloons.length)
     if (this.game.time.now > this.cannonBallTime) {
+      // Play sound
+      this.cannonFire.play();
+
       var cannonRotationRadians = this.degreesToRadians(-this.cannon.body.rotation + 40);
       // Use trig to find out where cannon ball should appear
       this.cannonBall = this.game.add.sprite(this.cannon.body.x + 101 + 179 * Math.cos(cannonRotationRadians), this.cannon.body.y + 185 - 179 * Math.sin(cannonRotationRadians), 'cannonBall');
@@ -110,6 +116,14 @@ giveUsJobs.Game.prototype = {
   },
 
   destroyBalloonAndCannon: function (cannonBall, balloon) {
+    // Play sound
+    this.popSound.play();
+
+    // Display 'pop' graphic
+    this.pop = this.game.add.sprite(this.cannonBall.body.x, this.cannonBall.body.y, 'pop');
+    this.pop.lifespan = 500;
+    this.pop.anchor.set(0.5, 0.5);
+
     this.cannonBall.destroy();
     this.balloon.destroy();
   },

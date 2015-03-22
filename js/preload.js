@@ -15,10 +15,16 @@ giveUsJobs.Preload.prototype = {
     // this.load.setPreloadSprite(this.preloadBar);
 
     //load game assets
+    //images
     this.load.image('sky', 'images/sky.png');
     this.load.image('balloon', 'images/balloon.png');
     this.load.image('cannon', 'images/cannon.png');
     this.load.image('cannonBall', 'images/cannon_ball.png');
+    this.load.image('pop', 'images/pop.png');
+
+    //sounds
+    this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
+    this.load.audio('popSound', 'audio/pop.ogg');
   },
 
   create: function() {
