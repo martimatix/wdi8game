@@ -101,9 +101,9 @@ giveUsJobs.Game.prototype = {
     // Update Score and Time
     this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + timeLeft;
 
-
     // Game over condition
-    if (this.balloons.length === 0 || timeLeft < 0) {
+    if (this.score === 11 || timeLeft < 0) {
+      giveUsJobs.win = true;
       // stop music
       this.guileTheme.stop();
       // go to game over screen
@@ -111,7 +111,7 @@ giveUsJobs.Game.prototype = {
     }
   },
 
-  launchBalloon: function() {
+  launchBalloon: function() {    
 
     if (this.game.time.now > this.balloonTime)
     {
