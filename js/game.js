@@ -11,9 +11,13 @@ giveUsJobs.Game.prototype = {
     this.cannonBallTime = 0;
     this.piOverOneEighty = Math.PI / 180;
 
-    // Load sounds
+    // Audio variables
     this.cannonFire = this.game.add.audio('cannonFire');
     this.popSound = this.game.add.audio('popSound');
+    this.guileTheme = this.game.add.audio('guileTheme');
+
+    // Start music
+    this.guileTheme.play();
 
     //  This will run in Canvas mode, so let's gain a little speed and display
     this.game.renderer.clearBeforeRender = false;

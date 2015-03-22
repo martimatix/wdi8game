@@ -22,9 +22,10 @@ giveUsJobs.Preload.prototype = {
     this.load.image('cannonBall', 'images/cannon_ball.png');
     this.load.image('pop', 'images/pop.png');
 
-    //sounds
+    //audio
     this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
     this.load.audio('popSound', 'audio/pop.ogg');
+    this.load.audio('guileTheme', 'audio/guile_theme.mp3')
   },
 
   create: function() {
