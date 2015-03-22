@@ -80,7 +80,7 @@ giveUsJobs.Game.prototype = {
     }
 
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.game.input.activePointer.justPressed())
     {
       this.fireCannon();
     }
