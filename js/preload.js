@@ -17,10 +17,22 @@ giveUsJobs.Preload.prototype = {
     //load game assets
     //images
     this.load.image('sky', 'images/sky.png');
-    this.load.image('balloon', 'images/balloon.png');
     this.load.image('cannon', 'images/cannon.png');
     this.load.image('cannonBall', 'images/cannon_ball.png');
     this.load.image('pop', 'images/pop.png');
+
+    // WDI8 Cast
+    this.load.image('amy', 'images/amy.png');
+    this.load.image('bishin', 'images/bishin.png');
+    this.load.image('faryar', 'images/faryar.png');
+    this.load.image('julia', 'images/julia.png');
+    this.load.image('liam', 'images/liam.png');
+    this.load.image('mario', 'images/mario.png');
+    this.load.image('may', 'images/may.png');
+    this.load.image('sonya', 'images/sonya.png');
+    this.load.image('tj', 'images/tj.png');
+    this.load.image('tom', 'images/tom.png');
+    this.load.image('xander', 'images/xander.png');
 
     //audio
     this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
