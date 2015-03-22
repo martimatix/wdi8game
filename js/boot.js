@@ -17,8 +17,8 @@ giveUsJobs.Boot.prototype = {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.scale.minWidth = 240;
     this.scale.minHeight = 170;
-    this.scale.maxWidth = 2880;
-    this.scale.maxHeight = 1920;
+    this.scale.maxWidth = 800;
+    this.scale.maxHeight = 600;
 
     //have the game centered horizontally
     this.scale.pageAlignHorizontally = true;

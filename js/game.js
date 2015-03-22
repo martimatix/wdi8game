@@ -41,7 +41,7 @@ giveUsJobs.Game.prototype = {
     this.balloons.physicsBodyType = Phaser.Physics.ARCADE;
 
     // All 11 of them
-    // Using createMultiple because it requires less arguments than create
+    // Using createMultiple() because it requires less arguments than create()
     this.balloons.createMultiple(1, 'amy');
     this.balloons.createMultiple(1, 'bishin');
     this.balloons.createMultiple(1, 'faryar');
@@ -53,7 +53,7 @@ giveUsJobs.Game.prototype = {
     this.balloons.createMultiple(1, 'tj');
     this.balloons.createMultiple(1, 'tom');
     this.balloons.createMultiple(1, 'xander');
-    // this.balloons.createMultiple(11, 'balloon');
+
     this.balloons.setAll('anchor.x', 0.5);
     this.balloons.setAll('anchor.y', 0.5);
 
@@ -125,7 +125,7 @@ giveUsJobs.Game.prototype = {
         this.balloon.body.collideWorldBounds = false;
 
         // balloon moves upwards
-        this.game.physics.arcade.velocityFromAngle(-100 + 30 * Math.random(), 200 + 300 * Math.random(), this.balloon.body.velocity);
+        this.game.physics.arcade.velocityFromAngle(-90 + 30 * Math.random(), 200 + 300 * Math.random(), this.balloon.body.velocity);
 
         this.balloonTime = this.game.time.now + 2000 + 2000 * Math.random();
 
