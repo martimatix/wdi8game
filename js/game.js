@@ -106,7 +106,9 @@ giveUsJobs.Game.prototype = {
 
     // Game over condition
     if (this.score === 11 || timeLeft < 0) {
-      giveUsJobs.win = true;
+      if (this.score === 11) {
+        giveUsJobs.win = true;
+      }
       // stop music
       this.guileTheme.stop();
       // go to game over screen
@@ -118,21 +120,17 @@ giveUsJobs.Game.prototype = {
 
     if (this.game.time.now > this.balloonTime)
     {
-      this.balloon = this.balloons.getRandom();
+      this.balloon = this.balloons.getRandom(); 
 
-      if (this.balloon)
-      {
-        this.balloon.reset(500 + 100 * Math.random(), 600);
-        this.balloon.lifespan = 3000;
-        
-        this.balloon.body.collideWorldBounds = false;
+      this.balloon.reset(500 + 100 * Math.random(), 600);
+      this.balloon.lifespan = 3000;
+      
+      this.balloon.body.collideWorldBounds = false;
 
-        // balloon moves upwards
-        this.game.physics.arcade.velocityFromAngle(-90 + 30 * Math.random(), 200 + 300 * Math.random(), this.balloon.body.velocity);
+      // balloon moves upwards
+      this.game.physics.arcade.velocityFromAngle(-90 + 30 * Math.random(), 200 + 300 * Math.random(), this.balloon.body.velocity);
 
-        this.balloonTime = this.game.time.now + 2000 + 2000 * Math.random();
-
-      }
+      this.balloonTime = this.game.time.now + 2000 + 2000 * Math.random();
     }
   },
 
@@ -157,15 +155,35 @@ giveUsJobs.Game.prototype = {
     // Play sound
     this.popSound.play();
 
+    // Display photo
+    // this.balloon.key will return the name of the person in the balloon
+
     // Display 'pop' graphic
     this.pop = this.game.add.sprite(this.cannonBall.body.x, this.cannonBall.body.y, 'pop');
     this.pop.lifespan = 500;
     this.pop.anchor.set(0.5, 0.5);
 
+    this.displayProfile(this.balloon.key);
+
     this.cannonBall.destroy();
     this.balloon.destroy();
 
     this.score++;
+  },
+
+  displayProfile: function (person) {
+    // Draw rectangle
+    var graphics = this.game.add.graphics(0, 0);
+    graphics.beginFill(0xE3CB84);
+    graphics.lineStyle(4, 0xB59947, 1);
+    graphics.drawRect(20, 10, 320, 160);
+    graphics.beginFill(0xFF3300);
+
+     // Name that appears in profile box
+    this.profileName = this.game.add.bitmapText(40, 70, 'carrier_command', person, 20);
+
+    this.profilePic = this.game.add.sprite(200, 30, "profile_" + person);
+    this.pop.anchor.set(0.5, 0);
   },
 
   degreesToRadians: function (degrees) {

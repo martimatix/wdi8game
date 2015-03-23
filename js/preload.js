@@ -5,14 +5,6 @@ giveUsJobs.Preload = function(){};
 
 giveUsJobs.Preload.prototype = {
   preload: function() {
-    //show logo in loading screen
-    // this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-    // this.splash.anchor.setTo(0.5);
-
-    // this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY + 128, 'preloadbar');
-    // this.preloadBar.anchor.setTo(0.5);
-
-    // this.load.setPreloadSprite(this.preloadBar);
 
     // load game assets
     // images
@@ -22,7 +14,7 @@ giveUsJobs.Preload.prototype = {
     this.load.image('pop', 'images/pop.png');
     this.load.image('platform', 'images/platform.png');
 
-    // WDI8 Cast
+    // WDI8 Cast - Balloons
     this.load.image('amy', 'images/amy.png');
     this.load.image('bishin', 'images/bishin.png');
     this.load.image('faryar', 'images/faryar.png');
@@ -34,6 +26,19 @@ giveUsJobs.Preload.prototype = {
     this.load.image('tj', 'images/tj.png');
     this.load.image('tom', 'images/tom.png');
     this.load.image('xander', 'images/xander.png');
+
+    // WDI8 Profile pics
+    this.load.image('profile_amy', 'images/profile_pics/amy.png');
+    this.load.image('profile_bishin', 'images/profile_pics/bishin.png');
+    this.load.image('profile_faryar', 'images/profile_pics/faryar.png');
+    this.load.image('profile_julia', 'images/profile_pics/julia.png');
+    this.load.image('profile_liam', 'images/profile_pics/liam.png');
+    this.load.image('profile_mario', 'images/profile_pics/mario.png');
+    this.load.image('profile_may', 'images/profile_pics/may.png');
+    this.load.image('profile_sonya', 'images/profile_pics/sonya.png');
+    this.load.image('profile_tj', 'images/profile_pics/tj.png');
+    this.load.image('profile_tom', 'images/profile_pics/tom.png');
+    this.load.image('profile_xander', 'images/profile_pics/xander.png');
 
     // audio
     this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
