@@ -88,48 +88,38 @@ giveUsJobs.Game.prototype = {
   },
 
   update: function () {
-    // Rotate cannon
-    if (this.cannon.body.rotation > 35)
-    {   
+    // Controls for firing cannon
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.game.input.activePointer.justPressed()) {
+      this.fireCannon();
+    }
+    
+    this.rotateCannon();
+    this.launchBalloon();
+    this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
+    this.timeLeft = this.timeLimit - Math.round((this.game.time.now - this.gameTimer) / 1000)
+    this.updateScoreAndTime();
+    this.checkGameOver();
+  },
+
+  rotateCannon: function () {
+    if (this.cannon.body.rotation > 35) {   
       this.cannon.body.angularVelocity = -300;
     }
 
-    if (this.cannon.body.rotation < -55)
-    {
+    if (this.cannon.body.rotation < -55) {
       this.cannon.body.angularVelocity = 300;
-    }
-
-    // Controls for firing cannon
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.game.input.activePointer.justPressed())
-    {
-      this.fireCannon();
-    }
-
-    this.launchBalloon();
-    this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
-
-    var timeLeft = this.timeLimit - Math.round((this.game.time.now - this.gameTimer) / 1000)
-
-    // Update Score and Time
-    this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + timeLeft;
-
-    // Game over condition
-    if (!giveUsJobs.win && this.score === 11) {
-      giveUsJobs.win = true;
-      // Start victory timer
-      this.victoryTimer = this.game.time.now;
-    }
-
-    // Exit game if 2 seconds have elapsed since victory or time is over (but not if player has won)
-    if ((this.game.time.now - this.victoryTimer) > 2000 || (timeLeft < 0 && !giveUsJobs.win)) {
-      // stop music
-      this.guileTheme.stop();
-      // go to game over screen
-      this.game.state.start('GameOver');
     }
   },
 
-  launchBalloon: function() {    
+  updateScoreAndTime: function () {
+    if (giveUsJobs.win) {
+      this.scoreText.text = "Congratulations!!!"
+    } else {
+      this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + this.timeLeft;
+    }
+  },
+
+  launchBalloon: function () {    
 
     if (this.game.time.now > this.balloonTime && !giveUsJobs.win)
     {
@@ -201,6 +191,22 @@ giveUsJobs.Game.prototype = {
 
   degreesToRadians: function (degrees) {
     return degrees * this.piOverOneEighty;
-  }
+  },
 
+  checkGameOver: function () {
+    // Game over condition
+    if (!giveUsJobs.win && this.score === 11) {
+      giveUsJobs.win = true;
+      // Start victory timer
+      this.victoryTimer = this.game.time.now;
+    }
+
+    // Exit game if 2 seconds have elapsed since victory or time is over (but not if player has won)
+    if ((this.game.time.now - this.victoryTimer) > 2000 || (this.timeLeft < 0 && !giveUsJobs.win)) {
+      // stop music
+      this.guileTheme.stop();
+      // go to game over screen
+      this.game.state.start('GameOver');
+    }
+  }
 }
