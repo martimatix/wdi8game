@@ -9,7 +9,7 @@ giveUsJobs.Preload.prototype = {
     // Loading text
     var style = { font: "32px Arial", fill: "#000", align: "center" };
 
-    this.loadingText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading graphics...", style); 
+    this.loadingText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading, please wait...", style); 
     this.loadingText.anchor.set(0.5, 0.5);
 
     // load game assets
@@ -47,15 +47,11 @@ giveUsJobs.Preload.prototype = {
     this.load.image('profile_xander', 'images/profile_pics/xander.png');
 
     // audio
-    this.loadingText.text = "Loading audio..."
-
     this.load.audio('cannonFire', 'audio/cannon_fire.ogg');
     this.load.audio('popSound', 'audio/pop.ogg');
     this.load.audio('guileTheme', 'audio/guile_theme.mp3')
 
     // fonts
-    this.loadingText.text = "Loading font..."
-
     this.load.bitmapFont('carrier_command', 'fonts/carrier_command.png', 'fonts/carrier_command.xml');
   },
 
