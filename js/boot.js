@@ -18,6 +18,7 @@ giveUsJobs.Boot.prototype = {
 
     //have the game centered horizontally
     this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
 
     //screen size will be set automatically
     this.scale.setScreenSize(true);
