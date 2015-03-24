@@ -6,6 +6,13 @@ giveUsJobs.Preload = function(){};
 giveUsJobs.Preload.prototype = {
   preload: function() {
 
+    // Loading text
+    var style = { font: "65px Arial", fill: "#000", align: "center" };
+
+    this.text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", style); 
+    this.text.anchor.set(0.5, 0.5);
+    this.text.rotateSpeed = 1;
+
     // load game assets
     // images
     this.load.image('sky', 'images/sky.png');
@@ -50,6 +57,10 @@ giveUsJobs.Preload.prototype = {
   },
 
   create: function() {
-    this.state.start('Intro');
+    // this.state.start('Intro');
+  },
+
+  update: function () {
+    this.text.angle += this.text.rotateSpeed;
   }
 };
