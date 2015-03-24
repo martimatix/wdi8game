@@ -1,20 +1,20 @@
 # Balloon Game for WDI8 Year Book
 
-## Play the game now at: http://martimatix.github.io/wdi8game
+## [Play the game now](http://martimatix.github.io/wdi8game)
 
 If you would like to contact any of the WDI8 graduates, see the list below for their github accounts:
 
-* Amy     @amysimmons
-* Bishin  @mondaydreaming
-* Faryar  @faryar88
-* Julia   @julia-
-* Liam    @liamdarmody
-* Mario   @martimatix
-* May     @wxm112
-* Sonya   @SoxFace
-* TJ      @einartj
-* Tom     @tomvalorsa
-* Xander  @xandero
+* [Amy   ](https://github.com/amysimmons)
+* [Bishin](https://github.com/mondaydreaming)
+* [Faryar](https://github.com/faryar88)
+* [Julia ](https://github.com/julia-)
+* [Liam  ](https://github.com/liamdarmody)
+* [Mario ](https://github.com/martimatix)
+* [May   ](https://github.com/wxm112)
+* [Sonya ](https://github.com/SoxFace)
+* [TJ    ](https://github.com/einartj)
+* [Tom   ](https://github.com/tomvalorsa)
+* [Xander](https://github.com/xandero)
 
 ---
 
