@@ -92,7 +92,7 @@ giveUsJobs.Game.prototype = {
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.game.input.activePointer.justPressed()) {
       this.fireCannon();
     }
-    
+
     this.rotateCannon();
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
@@ -114,6 +114,7 @@ giveUsJobs.Game.prototype = {
   updateScoreAndTime: function () {
     if (giveUsJobs.win) {
       this.scoreText.text = "Congratulations!!!"
+      this.scoreText.tint = 0x4aff02;
     } else {
       this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + this.timeLeft;
     }

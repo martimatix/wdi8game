@@ -23,6 +23,7 @@ giveUsJobs.Intro.prototype = {
     this.pressStart = this.game.add.bitmapText(30, 500, 'carrier_command', clickOrStart, 30);
     this.pressStart.tint = 0xf002ff;
   },
+  
   update: function() {
     // Blink text
     if (Math.round(this.game.time.now / 1000) % 2 === 0) {
@@ -32,6 +33,7 @@ giveUsJobs.Intro.prototype = {
     }
 
     if(this.game.input.activePointer.justPressed()) {
+      // Full Screen Mode
       this.game.state.start('Game');
     }
   }
