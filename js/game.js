@@ -7,9 +7,12 @@ giveUsJobs.Game.prototype = {
 
   create: function() {
 
+    giveUsJobs.win = false;
+
     this.balloonTime = 0;
     this.cannonBallTime = 0;
     this.piOverOneEighty = Math.PI / 180;
+    this.timeLimit = 60; // 60 seconds
 
     // Audio variables
     this.cannonFire = this.game.add.audio('cannonFire');
@@ -71,11 +74,17 @@ giveUsJobs.Game.prototype = {
     this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
     // Score
-    this.score = 0
+    this.score = 0;
     this.scoreText = this.game.add.bitmapText(360, 5, 'carrier_command','',17);
 
     // Timer
-    this.gameTimer = this.game.time.now
+    this.gameTimer = this.game.time.now;
+
+    // Victory timer - waits two seconds before terminating game if player wins.
+    // 1100 to ensure that game over screen will not be immeadiately displayed
+    // in the edge case that the player shoots a balloon just before the timer
+    // hits zero.
+    this.victoryTimer = this.game.time.now + this.timeLimit * 1100;
   },
 
   update: function () {
@@ -99,16 +108,20 @@ giveUsJobs.Game.prototype = {
     this.launchBalloon();
     this.game.physics.arcade.collide(this.cannonBall, this.balloon, this.destroyBalloonAndCannon, null, this);
 
-    var timeLeft = 60 - Math.round((this.game.time.now - this.gameTimer) / 1000)
+    var timeLeft = this.timeLimit - Math.round((this.game.time.now - this.gameTimer) / 1000)
 
     // Update Score and Time
     this.scoreText.text = "Score " + this.score + "/11" + "  Time: " + timeLeft;
 
     // Game over condition
-    if (this.score === 11 || timeLeft < 0) {
-      if (this.score === 11) {
-        giveUsJobs.win = true;
-      }
+    if (!giveUsJobs.win && this.score === 11) {
+      giveUsJobs.win = true;
+      // Start victory timer
+      this.victoryTimer = this.game.time.now;
+    }
+
+    // Exit game if 2 seconds have elapsed since victory or time is over (but not if player has won)
+    if ((this.game.time.now - this.victoryTimer) > 2000 || (timeLeft < 0 && !giveUsJobs.win)) {
       // stop music
       this.guileTheme.stop();
       // go to game over screen
@@ -118,7 +131,7 @@ giveUsJobs.Game.prototype = {
 
   launchBalloon: function() {    
 
-    if (this.game.time.now > this.balloonTime)
+    if (this.game.time.now > this.balloonTime && !giveUsJobs.win)
     {
       this.balloon = this.balloons.getRandom(); 
 
